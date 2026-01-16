@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>情人节惊喜</title>
+
 <style>
 html, body {
   margin: 0;
@@ -17,10 +18,25 @@ html, body {
   color: white;
 }
 
+/* 点击提示 */
+#start {
+  position: absolute;
+  font-size: 26px;
+  color: #ff6fae;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity: .4;}
+  50% {opacity: 1;}
+  100% {opacity: .4;}
+}
+
+/* 爱心 */
 .heart {
   position:absolute;
   color:#ff6fae;
-  animation: float 7s linear infinite;
+  animation: float 7s linear forwards;
 }
 
 @keyframes float {
@@ -28,63 +44,90 @@ html, body {
   to {transform: translateY(-10vh); opacity:0;}
 }
 
+/* 文字 */
 #text {
   position: relative;
   font-size: 30px;
   text-align: center;
   line-height: 1.6;
   opacity: 0;
+}
+
+#text.show {
   animation: fadein 6s ease-in forwards;
-  animation-delay: 4s;
 }
 
 #sign {
   font-size: 20px;
   margin-top: 20px;
   opacity: 0;
-  animation: fadein 4s ease-in forwards;
-  animation-delay: 7s;
 }
 
-@keyframes fadein { to { opacity: 1; } }
+#text.show #sign {
+  animation: fadein 4s ease-in forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadein {
+  to { opacity: 1; }
+}
 </style>
 </head>
+
 <body>
 
+<!-- 点击提示 -->
+<div id="start">❤️ 轻触屏幕开始 ❤️</div>
+
+<!-- 正文内容 -->
 <div id="text">
   每一天我都比昨天更爱你<br>
   情人节快乐 my bb
   <div id="sign">— Your hubby: Mr. Bao</div>
 </div>
 
-<audio id="music" loop autoplay playsinline muted>
-  <source src="https://github.com/aizijiwj-blip/LOVE/raw/refs/heads/main/easy-listening-romantic-piano-275419.mp3" type="audio/mpeg">
+<!-- 音乐（不自动播放） -->
+<audio id="music" loop playsinline muted>
+  <source src="easy-listening-romantic-piano-275419.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// 改进自动播放策略
 const audio = document.getElementById('music');
-function tryPlay() {
+const text = document.getElementById('text');
+const start = document.getElementById('start');
+
+let started = false;
+
+function startLove() {
+  if (started) return;
+  started = true;
+
+  // 隐藏提示
+  start.style.display = 'none';
+
+  // 显示文字
+  text.classList.add('show');
+
+  // 播放音乐（iOS / 微信 100% 生效）
   audio.muted = false;
   audio.play().catch(()=>{});
-  document.removeEventListener('touchstart', tryPlay);
-  document.removeEventListener('click', tryPlay);
-}
-document.addEventListener('touchstart', tryPlay);
-document.addEventListener('click', tryPlay);
 
-// 爱心动画
-setInterval(() => {
-  const h = document.createElement('div');
-  h.className = 'heart';
-  h.innerHTML = '❤';
-  h.style.left = Math.random() * 100 + 'vw';
-  h.style.fontSize = (18 + Math.random() * 36) + 'px';
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 7000);
-}, 220);
+  // 开始爱心动画
+  setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = '❤';
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (18 + Math.random() * 36) + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+  }, 220);
+}
+
+// 监听首次点击
+document.addEventListener('click', startLove);
+document.addEventListener('touchstart', startLove);
 </script>
 
 </body>
 </html>
-
