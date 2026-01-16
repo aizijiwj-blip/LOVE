@@ -18,8 +18,8 @@ html, body {
 }
 
 .heart {
-  position: absolute;
-  color: #ff6fae;
+  position:absolute;
+  color:#ff6fae;
   animation: float 7s linear infinite;
 }
 
@@ -58,20 +58,18 @@ html, body {
 </div>
 
 <audio id="music" loop autoplay playsinline muted>
-  <source src="https://raw.githubusercontent.com/%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/love/main/easy-listening-romantic-piano-275419.mp3" type="audio/mpeg">
+  <source src="https://github.com/aizijiwj-blip/LOVE/raw/refs/heads/main/easy-listening-romantic-piano-275419.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// 尝试解除静音并播放音乐
+// 改进自动播放策略
 const audio = document.getElementById('music');
-
 function tryPlay() {
   audio.muted = false;
   audio.play().catch(()=>{});
   document.removeEventListener('touchstart', tryPlay);
   document.removeEventListener('click', tryPlay);
 }
-
 document.addEventListener('touchstart', tryPlay);
 document.addEventListener('click', tryPlay);
 
@@ -81,7 +79,7 @@ setInterval(() => {
   h.className = 'heart';
   h.innerHTML = '❤';
   h.style.left = Math.random() * 100 + 'vw';
-  h.style.fontSize = (18 + Math.random() * 34) + 'px';
+  h.style.fontSize = (18 + Math.random() * 36) + 'px';
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 7000);
 }, 220);
@@ -89,3 +87,4 @@ setInterval(() => {
 
 </body>
 </html>
+
