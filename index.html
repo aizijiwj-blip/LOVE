@@ -49,26 +49,11 @@ html,body{
   <div id="sign">— Your hubby: Mr. Bao</div>
 </div>
 
-<audio id="music" loop muted autoplay playsinline>
+<audio autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c1cfd3f6c.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const audio = document.getElementById('music');
-
-// 尝试在页面交互触发播放
-function tryPlayAudio(){
-    audio.muted = false; // 解除静音
-    audio.play().catch(()=>{}); 
-    document.removeEventListener('touchstart', tryPlayAudio);
-    document.removeEventListener('click', tryPlayAudio);
-}
-
-// 如果浏览器阻止自动播放，用户首次触碰屏幕或点击页面时触发
-document.addEventListener('touchstart', tryPlayAudio);
-document.addEventListener('click', tryPlayAudio);
-
-// 爱心动画
 setInterval(()=>{
   const h=document.createElement('div');
   h.className='heart';
