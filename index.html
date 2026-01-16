@@ -2,43 +2,51 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Love</title>
+<title>情人节惊喜</title>
 <style>
-html,body{
-  margin:0;height:100%;overflow:hidden;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-family:"Helvetica Neue",Arial,sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: white;
 }
-.heart{
-  position:absolute;
-  color:#ff6fae;
+
+.heart {
+  position: absolute;
+  color: #ff6fae;
   animation: float 7s linear infinite;
 }
-@keyframes float{
-  from{transform:translateY(110vh);opacity:1}
-  to{transform:translateY(-10vh);opacity:0}
+
+@keyframes float {
+  from {transform: translateY(110vh); opacity:1;}
+  to {transform: translateY(-10vh); opacity:0;}
 }
-#text{
-  position:relative;
-  font-size:30px;
-  text-align:center;
-  line-height:1.6;
-  opacity:0;
+
+#text {
+  position: relative;
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0;
   animation: fadein 6s ease-in forwards;
-  animation-delay:4s;
+  animation-delay: 4s;
 }
-#sign{
-  font-size:20px;
-  margin-top:20px;
-  opacity:0;
+
+#sign {
+  font-size: 20px;
+  margin-top: 20px;
+  opacity: 0;
   animation: fadein 4s ease-in forwards;
-  animation-delay:7s;
+  animation-delay: 7s;
 }
-@keyframes fadein{to{opacity:1}}
+
+@keyframes fadein { to { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -49,20 +57,34 @@ html,body{
   <div id="sign">— Your hubby: Mr. Bao</div>
 </div>
 
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c1cfd3f6c.mp3" type="audio/mpeg">
+<audio id="music" loop autoplay playsinline muted>
+  <source src="https://raw.githubusercontent.com/%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/love/main/easy-listening-romantic-piano-275419.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='❤';
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=(18+Math.random()*34)+'px';
+// 尝试解除静音并播放音乐
+const audio = document.getElementById('music');
+
+function tryPlay() {
+  audio.muted = false;
+  audio.play().catch(()=>{});
+  document.removeEventListener('touchstart', tryPlay);
+  document.removeEventListener('click', tryPlay);
+}
+
+document.addEventListener('touchstart', tryPlay);
+document.addEventListener('click', tryPlay);
+
+// 爱心动画
+setInterval(() => {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerHTML = '❤';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = (18 + Math.random() * 34) + 'px';
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),7000);
-},220);
+  setTimeout(() => h.remove(), 7000);
+}, 220);
 </script>
 
 </body>
