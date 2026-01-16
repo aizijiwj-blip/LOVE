@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Love</title>
+<style>
+html,body{
+  margin:0;height:100%;overflow:hidden;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+}
+.heart{
+  position:absolute;
+  color:#ff6fae;
+  animation: float 7s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh);opacity:1}
+  to{transform:translateY(-10vh);opacity:0}
+}
+#text{
+  position:relative;
+  font-size:30px;
+  text-align:center;
+  line-height:1.6;
+  opacity:0;
+  animation: fadein 6s ease-in forwards;
+  animation-delay:4s;
+}
+#sign{
+  font-size:20px;
+  margin-top:20px;
+  opacity:0;
+  animation: fadein 4s ease-in forwards;
+  animation-delay:7s;
+}
+@keyframes fadein{to{opacity:1}}
+</style>
+</head>
+<body>
+
+<div id="text">
+  每一天我都比昨天更爱你<br>
+  情人节快乐 my bb
+  <div id="sign">— Your hubby: Mr. Bao</div>
+</div>
+
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c1cfd3f6c.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(18+Math.random()*34)+'px';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},220);
+</script>
+
+</body>
+</html>
